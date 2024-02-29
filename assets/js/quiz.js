@@ -1,32 +1,42 @@
-async function fetchData() {
+const navTopic = document.querySelector(".nav-topics");
+let topicId;
+
+navTopic.addEventListener('click', (event) => {
+  if (event.target.classList.contains('topics')) {
+    topicId = event.target.id;
+  }
+});
+
+async function fetchData(topicId) {
   try {
-    const response = await fetch('https://quizapi-y7gb.onrender.com/topics/1');
+    const response = await fetch(`https://quizapi-y7gb.onrender.com/topics/${topicId}`);
     const data = await response.json();
     return data;
   } catch (error) {
     console.error('Erro ao consumir a API:', error);
-  }
-}
-let quizData
-async function extractQuizData() {
-  let data = await fetchData()
-  
-  if (data && data.questions) {
-    quizData = data.questions.map(question => {
-      return {
-        question: question.question,
-        options: question.answers,
-        correct: question.answers[question.right_answer]
-      }
-    })
-    quizData = quizData
-    startBtnContainer.style.display = "block"
+    throw error;
   }
 }
 
-extractQuizData()
+async function extractQuizData(topicId) {
+  try {
+    let data = await fetchData(topicId);
 
+    if (data && data.questions) {
+      quizData = data.questions.map(question => {
+        return {
+          question: question.question,
+          options: question.answers,
+          correct: question.answers[question.right_answer]
+        };
+      });
 
+      createQuestion();
+    }
+  } catch (error) {
+    console.error('Erro ao extrair os dados do quiz:', error);
+  }
+}
 
 const quizContainer = document.querySelector(".quiz-container");
 const question = document.querySelector(".quiz-container .question");
@@ -40,20 +50,17 @@ let questionNumber = 0;
 let score = 0;
 const MAX_QUESTIONS = 5;
 let timerInterval;
+let quizData;
 
 const shuffleArray = (array) => {
   return array.slice().sort(() => Math.random() - 0.5);
 };
-
-quizData = shuffleArray(quizData);
 
 const resetLocalStorage = () => {
   for (i = 0; i < MAX_QUESTIONS; i++) {
     localStorage.removeItem(`userAnswer_${i}`);
   }
 };
-
-resetLocalStorage();
 
 const checkAnswer = (e) => {
   let userAnswer = e.target.textContent;
@@ -98,9 +105,8 @@ const createQuestion = () => {
   }, 1000);
 
   options.innerHTML = "";
-  question.innerHTML = `<span class='question-number'>${
-    questionNumber + 1
-  }/${MAX_QUESTIONS}</span>${quizData[questionNumber].question}`;
+  question.innerHTML = `<span class='question-number'>${questionNumber + 1
+    }/${MAX_QUESTIONS}</span>${quizData[questionNumber].question}`;
 
   const shuffledOptions = shuffleArray(quizData[questionNumber].options);
 
@@ -148,9 +154,8 @@ const displayQuizResult = () => {
       resultItem.classList.add("incorrect");
     }
 
-    resultItem.innerHTML = `<div class="question">Question ${i + 1}: ${
-      quizData[i].question
-    }</div>
+    resultItem.innerHTML = `<div class="question">Question ${i + 1}: ${quizData[i].question
+      }</div>
     <div class="user-answer">Your answer: ${userAnswer || "Not Answered"}</div>
     <div class="correct-answer">Correct answer: ${correctAnswer}</div>`;
 
@@ -179,5 +184,5 @@ nextBtn.addEventListener("click", displayNextQuestion);
 startBtn.addEventListener("click", () => {
   startBtnContainer.style.display = "none";
   quizContainer.style.display = "block";
-  createQuestion();
+  extractQuizData(topicId);
 });

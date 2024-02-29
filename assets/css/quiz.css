@@ -13,6 +13,7 @@
 .quiz-container .timer {
   font-weight: bold;
   text-align: right;
+  color: #51e351;
 }
 
 .timer.danger {
@@ -30,17 +31,18 @@
 
 .quiz-container .options {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 16px;
   margin-bottom: 20px;
 }
 
 .quiz-container .option {
   border: none;
+  border-radius: 10px;
   padding: 24px 32px;
   font-size: 18px;
   background: #ddd;
-  color: #fff;
+  color: #000;
 }
 
 .quiz-container button {
@@ -63,8 +65,9 @@
 .quiz-container .next-btn,
 .quiz-result .retake-btn {
   background: #ddd;
-  color: #fff;
+  color: #1a1c1f;
   border: none;
+  border-radius: 5px;
   padding: 12px 32px;
   font-size: 20px;
   text-transform: uppercase;
