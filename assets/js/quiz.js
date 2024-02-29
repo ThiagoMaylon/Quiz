@@ -138,7 +138,7 @@ const displayQuizResult = () => {
   quizResult.innerHTML = "";
 
   const resultHeading = document.createElement("h2");
-  resultHeading.innerHTML = `You have scored ${score} out of ${MAX_QUESTIONS}.`;
+  resultHeading.innerHTML = `Você acertou ${score} de ${MAX_QUESTIONS}.`;
   quizResult.appendChild(resultHeading);
 
   for (let i = 0; i < MAX_QUESTIONS; i++) {
@@ -154,17 +154,18 @@ const displayQuizResult = () => {
       resultItem.classList.add("incorrect");
     }
 
-    resultItem.innerHTML = `<div class="question">Question ${i + 1}: ${quizData[i].question
-      }</div>
-    <div class="user-answer">Your answer: ${userAnswer || "Not Answered"}</div>
-    <div class="correct-answer">Correct answer: ${correctAnswer}</div>`;
+    resultItem.innerHTML = `
+    <div class="question">
+    Question ${i + 1}: ${quizData[i].question}
+    </div>
+    `;
 
     quizResult.appendChild(resultItem);
   }
 
   const retakeBtn = document.createElement("button");
   retakeBtn.classList.add("retake-btn");
-  retakeBtn.innerHTML = "Retake Quiz";
+  retakeBtn.innerHTML = "Jogar Novamente";
   retakeBtn.addEventListener("click", retakeQuiz);
   quizResult.appendChild(retakeBtn);
 };

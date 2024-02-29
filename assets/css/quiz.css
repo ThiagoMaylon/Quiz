@@ -86,7 +86,9 @@
   font-family: "Roboto", sans-serif;
   padding: 16px;
 }
-
+.quiz-result h2{
+  color: #fff;
+}
 .quiz-result .question-container {
   padding: 12px;
   border: 1px solid #eee;
@@ -97,6 +99,10 @@
 
 .quiz-result .question-container.incorrect {
   background: #e63946;
+  color: #fff;
+}
+.quiz-result .question-container {
+  background: #51e351;
   color: #fff;
 }
 
