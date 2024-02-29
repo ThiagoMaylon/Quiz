@@ -1,6 +1,10 @@
 let navTopics = document.querySelector(".nav-topics")
 let textTitle = document.querySelector("#text-title")
 let textContet = document.querySelector("#text-contet")
+let h2 = document.querySelector("#quiz-h2")
+let btnStart = document.querySelector(".start-btn-container")
+
+btnStart.style.display = "none"
 
 async function fetchData() {
   try {
@@ -33,6 +37,8 @@ async function renderTopics() {
       topicElement.setAttribute('id', topic.id);
       topicElement.textContent = topic.title;
       topicElement.addEventListener('click', () => {
+        h2.classList.add("select")
+        btnStart.style.display = "flex"
         start(topic.id);
       });
       navTopics.appendChild(topicElement);

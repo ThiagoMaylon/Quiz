@@ -1,7 +1,13 @@
 .quiz{
   z-index: 1000;
 }
-
+.quiz #quiz-h2{
+  color: #fff;
+}
+.quiz #quiz-h2.select{
+  color: #fff;
+  display: none;
+}
 .quiz-container {
   font-family: "Roboto", sans-serif;
   max-width: 900px;
