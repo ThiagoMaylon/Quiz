@@ -4,6 +4,13 @@ let topicId;
 navTopic.addEventListener('click', (event) => {
   if (event.target.classList.contains('topics')) {
     topicId = event.target.id;
+    clearInterval(timerInterval);
+    retakeQuiz()
+    quizContainer.style.display = "none";
+    quizResult.style.display = "none";
+    startBtnContainer.style.display = "flex";
+    document.getElementById('start-btn-container').style.display = "none";
+    resetLocalStorage();
   }
 });
 
@@ -161,6 +168,7 @@ const displayQuizResult = () => {
     `;
 
     quizResult.appendChild(resultItem);
+
   }
 
   const retakeBtn = document.createElement("button");

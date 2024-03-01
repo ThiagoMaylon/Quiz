@@ -3,6 +3,7 @@ let textTitle = document.querySelector("#text-title")
 let textContet = document.querySelector("#text-contet")
 let h2 = document.querySelector("#quiz-h2")
 let btnStart = document.querySelector(".start-btn-container")
+let resultQuiz = document.querySelector(".quiz-result")
 
 btnStart.style.display = "none"
 
@@ -39,6 +40,7 @@ async function renderTopics() {
       topicElement.addEventListener('click', () => {
         h2.classList.add("select")
         btnStart.style.display = "flex"
+        resultQuiz.style.display = "none"
         start(topic.id);
       });
       navTopics.appendChild(topicElement);
