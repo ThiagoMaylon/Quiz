@@ -71,7 +71,7 @@ h6 {
 #header .profile img {
   margin: 15px auto;
   display: block;
-  width: 120px;
+  width: 150px;
 
 }
 
@@ -364,3 +364,14 @@ a .square{
   }
 }
 
+/* Pagina Sobre.html */
+.hero-container-sobre{
+  text-align: center;
+}
+.hero-container-sobre h1{
+  margin-bottom: 20px;
+}
+.hero-container-sobre p{
+  font-size: 18px;
+  max-width: 800px;
+}
